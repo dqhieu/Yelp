@@ -21,28 +21,40 @@ class BusinessCell: UITableViewCell {
     
     var business: Business! {
         didSet {
-            imgViewPhoto.setImageWithURLRequest(NSURLRequest(URL: business.imageURL!), placeholderImage: nil, success: { (request, respone, image) in
-                self.imgViewPhoto.alpha = 0
-                UIView.animateWithDuration(0.5, animations: {
-                    self.imgViewPhoto.image = image
-                    self.imgViewPhoto.alpha = 1
-                })
-                }, failure: nil)
-            
-            
-            
-            imgViewStar.setImageWithURLRequest(NSURLRequest(URL: business.ratingImageURL!), placeholderImage: nil, success: { (request, respone, image) in
+            if let imgURL = business.imageURL {
+                imgViewPhoto.setImageWithURLRequest(NSURLRequest(URL: imgURL), placeholderImage: nil, success: { (request, respone, image) in
+                    self.imgViewPhoto.alpha = 0
+                    UIView.animateWithDuration(0.5, animations: {
+                        self.imgViewPhoto.image = image
+                        self.imgViewPhoto.alpha = 1
+                    })
+
+                    }, failure: nil)
+            }
+            if let imgURL = business.ratingImageURL {
+                imgViewStar.setImageWithURLRequest(NSURLRequest(URL: imgURL), placeholderImage: nil, success: { (request, respone, image) in
                     self.imgViewStar.alpha = 0
                     UIView.animateWithDuration(0.5, animations: {
                         self.imgViewStar.image = image
                         self.imgViewStar.alpha = 1
                     })
-            }, failure: nil)
-            lblName.text = business.name!
-            lblDistance.text = business.distance!
-            lblReview.text = "\(business.reviewCount!.integerValue) reviews"
-            lblAddress.text = business.address!
-            lblCategory.text = business.categories
+                    }, failure: nil)
+            }
+            if let name = business.name {
+                lblName.text = name
+            }
+            if let distance = business.distance {
+                lblDistance.text = distance
+            }
+            if let reviewCount = business.reviewCount {
+                lblReview.text = "\(reviewCount.integerValue) reviews"
+            }
+            if let address = business.address {
+                lblAddress.text = address
+            }
+            if let category = business.categories {
+                lblCategory.text = category
+            }
         }
     }
     

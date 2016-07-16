@@ -16,12 +16,15 @@ class BusinessesViewController: UIViewController {
 
     var businesses: [Business]! = []
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initTableView()
         initSearchBar()
-    
+        initNagivationBar()
+        
+        doSearch("Thai")
     }
     
     func initTableView() {
@@ -39,29 +42,34 @@ class BusinessesViewController: UIViewController {
         navigationItem.titleView = searchBar
     }
     
+    func initNagivationBar() {
+        let navigationbarBackgroundImage = UIImage(named: "navigationbarbackground")
+        navigationController?.navigationBar.setBackgroundImage(navigationbarBackgroundImage, forBarMetrics: .Default)
+        let filterImage = UIImage(named: "filter")
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: filterImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(BusinessesViewController.showSettingsViewController))
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
+    }
+    
+    func showSettingsViewController() {
+        performSegueWithIdentifier("segueShowSettings", sender: nil)
+    }
+    
     func doSearch(text: String) {
         showLoadingProgress("Loading")
+        /*
         Business.searchWithTerm(text, completion: { (businesses: [Business]!, error: NSError!) -> Void in
             self.businesses = businesses
             self.tableView.reloadData()
             self.hideLoadingProgress()
-            
-            //for business in businesses {
-            //    print(business.name!)
-            //    print(business.address!)
-            // }
-        })
+        })*/
         
-        /* Example of Yelp search with more search options specified
-         Business.searchWithTerm("Restaurants", sort: .Distance, categories: ["asianfusion", "burgers"], deals: true) { (businesses: [Business]!, error: NSError!) -> Void in
-         self.businesses = businesses
-         
-         for business in businesses {
-         print(business.name!)
-         print(business.address!)
-         }
-         }
-         */
+        
+        Business.searchWithTerm(text, sort: .Distance, categories: [], deals: false) { (businesses: [Business]!, error: NSError!) -> Void in
+            self.businesses = businesses
+            self.tableView.reloadData()
+            self.hideLoadingProgress()
+        }
+        
 
     }
     
