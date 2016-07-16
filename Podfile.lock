@@ -23,18 +23,21 @@ PODS:
   - BDBOAuth1Manager (1.6.0):
     - AFNetworking/NSURLConnection (~> 2.6.0)
     - AFNetworking/NSURLSession (~> 2.6.0)
+  - SevenSwitch (2.0.0)
   - SVProgressHUD (2.0.3)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5)
   - BDBOAuth1Manager
+  - SevenSwitch (~> 2.0)
   - SVProgressHUD
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   BDBOAuth1Manager: cd5a5872f355ca38180d52ca2dd844f0b0c84797
+  SevenSwitch: 4ae92ffcad0ef93b38553b39a25e753c94eb7847
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
 
-PODFILE CHECKSUM: 6bca6358859c4aa6e8d9134f3256f197690f5dc2
+PODFILE CHECKSUM: aa656e7d8b8033401bedd1514cd652654e20c1b8
 
 COCOAPODS: 1.0.1

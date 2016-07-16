@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SevenSwitch
 
 @objc protocol CategoryCellDelegate: class {
     optional func categoryCell(categoryCell: CategoryCell, didChangeState state:Bool)
@@ -14,7 +15,7 @@ import UIKit
 
 class CategoryCell: UITableViewCell {
 
-    @IBOutlet weak var switchCategory: UISwitch!
+    let switchCategory = SevenSwitch()
     @IBOutlet weak var lblCategory: UILabel!
     
     weak var delegate:CategoryCellDelegate?
@@ -22,10 +23,13 @@ class CategoryCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        switchCategory.addTarget(self, action: #selector(CategoryCell.onValueChanged), forControlEvents: .ValueChanged)
         switchCategory.onTintColor = UIColor.redColor()
+        switchCategory.thumbImage = UIImage(named: "yelp_circle")
+        self.accessoryView = switchCategory
     }
-
-    @IBAction func onSwitchValueChanged(sender: AnyObject) {
+    
+    func onValueChanged() {
         delegate?.categoryCell!(self, didChangeState: switchCategory.on)
     }
     

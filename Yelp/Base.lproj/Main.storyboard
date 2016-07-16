@@ -159,23 +159,12 @@
                                                     <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" onImage="yelp-icon" offImage="yelp-icon" translatesAutoresizingMaskIntoConstraints="NO" id="cy5-4p-VQ3">
-                                                    <rect key="frame" x="541" y="6" width="51" height="31"/>
-                                                    <connections>
-                                                        <action selector="onSwitchValueChanged:" destination="pRC-Qm-kgP" eventType="valueChanged" id="yXV-Id-M49"/>
-                                                    </connections>
-                                                </switch>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="XT8-Ed-qgY" firstAttribute="leading" secondItem="nKR-Lt-sE3" secondAttribute="leading" constant="10" id="E7v-U3-5Qw"/>
-                                                <constraint firstAttribute="trailing" secondItem="cy5-4p-VQ3" secondAttribute="trailing" constant="10" id="UM5-RA-Vck"/>
                                                 <constraint firstItem="XT8-Ed-qgY" firstAttribute="centerY" secondItem="nKR-Lt-sE3" secondAttribute="centerY" id="bRg-TM-YCD"/>
-                                                <constraint firstItem="cy5-4p-VQ3" firstAttribute="centerY" secondItem="nKR-Lt-sE3" secondAttribute="centerY" id="tJw-Ki-OqU"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="switchOffer" destination="cy5-4p-VQ3" id="HHN-UG-Rkb"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DistanceCell" id="fkh-tS-nfP" customClass="DistanceCell" customModule="Yelp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="93.5" width="600" height="44"/>
@@ -236,23 +225,14 @@
                                                     <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="kc6-ld-5it">
-                                                    <rect key="frame" x="541" y="6" width="51" height="31"/>
-                                                    <connections>
-                                                        <action selector="onSwitchValueChanged:" destination="vST-cS-TfI" eventType="valueChanged" id="Zpt-uE-MMf"/>
-                                                    </connections>
-                                                </switch>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="kc6-ld-5it" secondAttribute="trailing" constant="10" id="50U-3A-krG"/>
                                                 <constraint firstItem="TtI-GV-2pN" firstAttribute="centerY" secondItem="YRK-bc-M9D" secondAttribute="centerY" id="RCi-cL-Qq7"/>
-                                                <constraint firstItem="kc6-ld-5it" firstAttribute="centerY" secondItem="YRK-bc-M9D" secondAttribute="centerY" id="Y4a-gT-KbQ"/>
                                                 <constraint firstItem="TtI-GV-2pN" firstAttribute="leading" secondItem="YRK-bc-M9D" secondAttribute="leading" constant="10" id="eOy-C7-LOz"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="lblCategory" destination="TtI-GV-2pN" id="tXh-6E-Nwn"/>
-                                            <outlet property="switchCategory" destination="kc6-ld-5it" id="aoW-Vu-Jdr"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SeeAllCell" id="gTm-uf-bMB">
@@ -350,7 +330,4 @@
             <point key="canvasLocation" x="1803" y="-330"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="yelp-icon" width="31" height="31"/>
-    </resources>
 </document>

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SevenSwitch
 
 @objc protocol DealOfferCellDelegate: class {
     optional func dealOfferCell(dealOfferCell: DealOfferCell, didChangeState state:Bool)
@@ -14,18 +15,26 @@ import UIKit
 
 class DealOfferCell: UITableViewCell {
 
-    @IBOutlet weak var switchOffer: UISwitch!
+    //@IBOutlet weak var switchOffer: UISwitch!
+    let switchOffer = SevenSwitch()
     
     weak var delegate:DealOfferCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        switchOffer.addTarget(self, action: #selector(DealOfferCell.onValueChanged), forControlEvents: .ValueChanged)
         switchOffer.onTintColor = UIColor.redColor()
+        switchOffer.thumbImage = UIImage(named: "yelp_circle")
+        self.accessoryView = switchOffer
     }
 
-    @IBAction func onSwitchValueChanged(sender: AnyObject) {
+    func onValueChanged() {
         delegate?.dealOfferCell!(self, didChangeState: switchOffer.on)
     }
+    
+    //@IBAction func onSwitchValueChanged(sender: AnyObject) {
+    //    delegate?.dealOfferCell!(self, didChangeState: switchOffer.on)
+    //}
 
 }

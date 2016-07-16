@@ -87,29 +87,32 @@ class BusinessesViewController: UIViewController {
                 self.businesses.removeAll()
             }
             
-            if searchSettings.maxDistance == 0 {
-                self.businesses.appendContentsOf(businesses)
-            }
-            else {
-                for business in businesses {
-                    if business.distance < searchSettings.maxDistance {
-                        self.businesses.append(business)
+            if businesses != nil {
+                if searchSettings.maxDistance == 0 {
+                    self.businesses.appendContentsOf(businesses)
+                }
+                else {
+                    for business in businesses {
+                        if business.distance < searchSettings.maxDistance {
+                            self.businesses.append(business)
+                        }
                     }
                 }
-            }
-            
-            // Make sure that businesses will be sorted
-            switch searchSettings.sortBy.rawValue {
-            case YelpSortMode.Distance.rawValue:
-                self.businesses.sortInPlace({ (b1, b2) -> Bool in
-                    b1.distance < b2.distance
-                })
-            case YelpSortMode.HighestRated.rawValue:
-                self.businesses.sortInPlace({ (b1, b2) -> Bool in
-                    b1.rating > b2.rating
-                })
-            default:
-                break
+                
+                // Make sure that businesses will be sorted
+                switch searchSettings.sortBy.rawValue {
+                case YelpSortMode.Distance.rawValue:
+                    self.businesses.sortInPlace({ (b1, b2) -> Bool in
+                        b1.distance < b2.distance
+                    })
+                case YelpSortMode.HighestRated.rawValue:
+                    self.businesses.sortInPlace({ (b1, b2) -> Bool in
+                        b1.rating > b2.rating
+                    })
+                default:
+                    break
+                }
+
             }
             
             
