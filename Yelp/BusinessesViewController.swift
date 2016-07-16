@@ -19,6 +19,10 @@ class BusinessesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.alpha = 0
+        UIView.animateWithDuration(1) { 
+            self.view.alpha = 1
+        }
         
         initTableView()
         initSearchBar()
@@ -43,8 +47,7 @@ class BusinessesViewController: UIViewController {
     }
     
     func initNagivationBar() {
-        let navigationbarBackgroundImage = UIImage(named: "navigationbarbackground")
-        navigationController?.navigationBar.setBackgroundImage(navigationbarBackgroundImage, forBarMetrics: .Default)
+        navigationController?.navigationBar.barTintColor = UIColor.redColor()
         let filterImage = UIImage(named: "filter")
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: filterImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(BusinessesViewController.showSettingsViewController))
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()

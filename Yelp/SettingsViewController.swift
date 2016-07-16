@@ -14,9 +14,11 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var distances = [
-        ["distance": "Auto"],
-        ["distance": "5 miles"],
-        ["distance": "10 miles"],
+        ["distance": "Auto", "value": "0"],
+        ["distance": "0.3 miles", "value": "0.3"],
+        ["distance": "1 miles", "value": "1"],
+        ["distance": "5 miles", "value": "5"],
+        ["distance": "10 miles", "value": "10"],
     ]
     var distanceSelectedIndex = 0
     var isDistanceExpanded = false
@@ -217,8 +219,7 @@ class SettingsViewController: UIViewController {
     }
     
     func initNavigationBar() {
-        let navigationbarBackgroundImage = UIImage(named: "navigationbarbackground")
-        navigationController?.navigationBar.setBackgroundImage(navigationbarBackgroundImage, forBarMetrics: .Default)
+        navigationController?.navigationBar.barTintColor = UIColor.redColor()
     }
     
 
