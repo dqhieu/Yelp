@@ -225,8 +225,8 @@ class SettingsViewController: UIViewController {
     }
     
     func loadSearchSettings() {
-        print("Settings start")
-        print(searchSettings!.categories)
+        //print("Settings start")
+        //print(searchSettings!.categories)
         // load category
         for (index, category) in categories.enumerate() {
             for scategory in searchSettings!.categories {
@@ -277,8 +277,9 @@ class SettingsViewController: UIViewController {
             let nvc = segue.destinationViewController as! UINavigationController
             let vc = nvc.topViewController as! BusinessesViewController
             vc.searchSettings = self.searchSettings!
-            print("Settings end")
-            print(searchSettings!.categories)
+            vc.searchSettings!.offset = 0
+            //print("Settings end")
+            //print(searchSettings!.categories)
             //vc.searchSettings?.categories = self.searchSettings?.categories
         }
     }

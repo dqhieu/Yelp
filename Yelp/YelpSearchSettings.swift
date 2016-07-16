@@ -14,4 +14,5 @@ struct YelpSearchSettings {
     var categories:[String]! = []
     var maxDistance:Double! = 0
     var deal:Bool! = false
+    var offset = 0
 }
