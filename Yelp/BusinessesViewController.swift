@@ -16,19 +16,20 @@ class BusinessesViewController: UIViewController {
 
     var businesses: [Business]! = []
     
+    var searchSettings:YelpSearchSettings?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.alpha = 0
-        UIView.animateWithDuration(1) { 
-            self.view.alpha = 1
+        
+        if searchSettings == nil {
+            searchSettings = YelpSearchSettings()
         }
         
         initTableView()
         initSearchBar()
         initNagivationBar()
         
-        doSearch("Thai")
+        doSearch(searchSettings!)
     }
     
     func initTableView() {
@@ -41,8 +42,11 @@ class BusinessesViewController: UIViewController {
     func initSearchBar() {
         searchBar = UISearchBar()
         searchBar.delegate = self
-        // Add SearchBar to the NavigationBar
+        searchBar.tintColor = UIColor.whiteColor()
         searchBar.sizeToFit()
+        if searchSettings?.term != "" {
+            searchBar.text = searchSettings?.term
+        }
         navigationItem.titleView = searchBar
     }
     
@@ -57,18 +61,23 @@ class BusinessesViewController: UIViewController {
         performSegueWithIdentifier("segueShowSettings", sender: nil)
     }
     
-    func doSearch(text: String) {
+    func doSearch(searchSettings: YelpSearchSettings) {
+        print("Main start")
+        print(searchSettings.categories)
         showLoadingProgress("Loading")
-        /*
-        Business.searchWithTerm(text, completion: { (businesses: [Business]!, error: NSError!) -> Void in
-            self.businesses = businesses
-            self.tableView.reloadData()
-            self.hideLoadingProgress()
-        })*/
-        
-        
-        Business.searchWithTerm(text, sort: .Distance, categories: [], deals: false) { (businesses: [Business]!, error: NSError!) -> Void in
-            self.businesses = businesses
+        Business.searchWithTerm(searchSettings.term, sort: searchSettings.sortBy, categories: searchSettings.categories, deals: searchSettings.deal) { (businesses: [Business]!, error: NSError!) -> Void in
+            self.businesses.removeAll()
+            
+            if searchSettings.maxDistance == 0 {
+                self.businesses = businesses
+            }
+            else {
+                for business in businesses {
+                    if business.distance < searchSettings.maxDistance {
+                        self.businesses.append(business)
+                    }
+                }
+            }
             self.tableView.reloadData()
             self.hideLoadingProgress()
         }
@@ -84,6 +93,17 @@ class BusinessesViewController: UIViewController {
     func hideLoadingProgress() {
         SVProgressHUD.dismiss()
         tableView.userInteractionEnabled = true
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "segueShowSettings" {
+            print("Main end")
+            print(searchSettings!.categories)
+            let nvc = segue.destinationViewController as! UINavigationController
+            let vc = nvc.topViewController as! SettingsViewController
+            vc.searchSettings = self.searchSettings
+            //vc.searchSettings?.categories = self.searchSettings?.categories
+        }
     }
 }
 
@@ -106,7 +126,8 @@ extension BusinessesViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        doSearch(searchBar.text!)
+        searchSettings!.term = searchBar.text
+        doSearch(searchSettings!)
     }
 }
 

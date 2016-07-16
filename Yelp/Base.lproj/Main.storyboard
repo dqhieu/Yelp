@@ -294,9 +294,15 @@
                     <navigationItem key="navigationItem" title="Settings" id="Ys4-BJ-gJC">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="r13-kI-S76">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="onCancel:" destination="rWJ-5o-ciI" id="7Hy-P3-K6h"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="URx-hP-Jxl">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="b3w-C8-sUC" kind="presentation" identifier="segueSave" id="71u-FM-Y9a"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>

@@ -8,6 +8,10 @@
 
 import UIKit
 
-class YelpSearchSettings: NSObject {
-
+struct YelpSearchSettings {
+    var term:String! = ""
+    var sortBy:YelpSortMode! = YelpSortMode.Distance
+    var categories:[String]! = []
+    var maxDistance:Double! = 0
+    var deal:Bool! = false
 }

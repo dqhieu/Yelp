@@ -44,7 +44,7 @@ class BusinessCell: UITableViewCell {
                 lblName.text = name
             }
             if let distance = business.distance {
-                lblDistance.text = distance
+                lblDistance.text = String(format: "%.2f mi", distance)
             }
             if let reviewCount = business.reviewCount {
                 lblReview.text = "\(reviewCount.integerValue) reviews"

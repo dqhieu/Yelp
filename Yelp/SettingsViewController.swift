@@ -9,7 +9,6 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
-
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -205,11 +204,14 @@ class SettingsViewController: UIViewController {
     var isCategoriesExpanded = false
     let categoriesPreview = 5
     
+    var searchSettings:YelpSearchSettings?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         initTableView()
         initNavigationBar()
+        loadSearchSettings()
     }
 
     func initTableView() {
@@ -222,17 +224,82 @@ class SettingsViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = UIColor.redColor()
     }
     
+    func loadSearchSettings() {
+        print("Settings start")
+        print(searchSettings!.categories)
+        // load category
+        for (index, category) in categories.enumerate() {
+            for scategory in searchSettings!.categories {
+                if scategory == category["code"] {
+                    categoriesState[index] = true
+                }
+            }
+        }
+        // load distance
+        switch searchSettings!.maxDistance {
+        case 0:
+            distanceSelectedIndex = 0
+        case 0.3:
+            distanceSelectedIndex = 1
+        case 1:
+            distanceSelectedIndex = 2
+        case 5:
+            distanceSelectedIndex = 3
+        case 10:
+            distanceSelectedIndex = 4
+        default:
+            distanceSelectedIndex = 0
+        }
+        // load sort
+        switch searchSettings!.sortBy.rawValue {
+        case YelpSortMode.BestMatched.rawValue:
+            sortSelectedIndex = 0
+        case YelpSortMode.Distance.rawValue:
+            sortSelectedIndex = 1
+        case YelpSortMode.HighestRated.rawValue:
+            sortSelectedIndex = 2
+        default:
+            sortSelectedIndex = 0
+        }
+    }
 
-    /*
+    @IBAction func onCancel(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "segueSave" {
+            setCategories()
+            let nvc = segue.destinationViewController as! UINavigationController
+            let vc = nvc.topViewController as! BusinessesViewController
+            vc.searchSettings = self.searchSettings!
+            print("Settings end")
+            print(searchSettings!.categories)
+            //vc.searchSettings?.categories = self.searchSettings?.categories
+        }
     }
-    */
-
+    
+    func setCategories() {
+        for (index, state) in categoriesState.enumerate() {
+            let code = categories[index]["code"]
+            if state {
+                if !(self.searchSettings?.categories.contains(code!))! {
+                    self.searchSettings?.categories.append(code!)
+                }
+            }
+            else {
+                for (sindex, value) in (self.searchSettings?.categories.enumerate())! {
+                    if value == code {
+                        self.searchSettings?.categories.removeAtIndex(sindex)
+                    }
+                }
+            }
+        }
+    }
 }
 
 extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
@@ -300,6 +367,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier("DealOfferCell") as! DealOfferCell
             cell.delegate = self
+            cell.switchOffer.on = searchSettings!.deal
             return cell
         }
         // Section Distance
@@ -355,12 +423,23 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         // Section Distance
         if indexPath.section == 1 {
             distanceSelectedIndex = indexPath.row
+            searchSettings!.maxDistance = Double(distances[distanceSelectedIndex]["value"]!)
             isDistanceExpanded = !isDistanceExpanded
             tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Automatic)
         }
         // Section Sort
         else if indexPath.section == 2 {
             sortSelectedIndex = indexPath.row
+            switch sortSelectedIndex {
+            case 0:
+                searchSettings!.sortBy = YelpSortMode.BestMatched
+            case 1:
+                searchSettings!.sortBy = YelpSortMode.Distance
+            case 2:
+                searchSettings!.sortBy = YelpSortMode.HighestRated
+            default:
+                searchSettings!.sortBy = YelpSortMode.Distance
+            }
             isSortExpanded = !isSortExpanded
             tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Automatic)
         }
@@ -382,7 +461,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension SettingsViewController: DealOfferCellDelegate {
     func dealOfferCell(dealOfferCell: DealOfferCell, didChangeState state: Bool) {
-        
+        searchSettings!.deal = state
     }
 }
 
