@@ -9,6 +9,7 @@
 import UIKit
 import SVProgressHUD
 import MapKit
+import RKDropdownAlert
 
 class BusinessesViewController: UIViewController {
 
@@ -116,6 +117,16 @@ class BusinessesViewController: UIViewController {
     }
     
     func doSearch(searchSettings: YelpSearchSettings) {
+        
+        if !Reachability.isConnectedToNetwork() {
+            hideLoadingProgress()
+            loadingMoreView!.stopAnimating()
+            // show alert dialog
+            RKDropdownAlert.show()
+            RKDropdownAlert.title("No internet connection", message: "Please check your network!", time: 3)
+            return
+        }
+        
         //print("Main start")
         //print(searchSettings.categories)
         showLoadingProgress("Loading")

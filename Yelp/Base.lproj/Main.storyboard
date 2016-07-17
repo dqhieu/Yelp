@@ -103,6 +103,7 @@
                                             <outlet property="lblDistance" destination="jzn-rK-bOD" id="9rQ-zL-Dk4"/>
                                             <outlet property="lblName" destination="oUh-iI-67Q" id="l0j-4a-tqF"/>
                                             <outlet property="lblReview" destination="iab-sH-9Cl" id="p6Z-13-bG4"/>
+                                            <segue destination="FvQ-KV-2aB" kind="push" id="GPD-Vy-2cv"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -129,6 +130,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fgb-4b-F1b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2600" y="358"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="WwA-vi-hYe">
+            <objects>
+                <viewController id="FvQ-KV-2aB" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pqg-SZ-mSC"/>
+                        <viewControllerLayoutGuide type="bottom" id="DAg-xF-LcR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="31I-Ps-NLf">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="9ty-nA-fQI"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Vn-cL-T6B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3385" y="358"/>
         </scene>
         <!--Settings-->
         <scene sceneID="RXy-ce-R9v">

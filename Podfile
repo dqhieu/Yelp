@@ -4,4 +4,5 @@ target ’Yelp’ do
    pod 'BDBOAuth1Manager'
    pod 'SVProgressHUD'
    pod 'SevenSwitch', '~> 2.0'
+   pod 'RKDropdownAlert'
 end

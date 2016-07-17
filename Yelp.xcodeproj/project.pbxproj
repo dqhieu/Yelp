@@ -16,6 +16,7 @@
 		22AAAA991AEA0A9700A544AF /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AAAA981AEA0A9700A544AF /* Business.swift */; };
 		22AAAA9C1AEA1EC300A544AF /* BusinessesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AAAA9B1AEA1EC300A544AF /* BusinessesViewController.swift */; };
 		697E2FB97ACDA641ACC2798C /* Pods_Yelp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CF9866797E66C2E4E46B8C /* Pods_Yelp.framework */; };
+		74005D541D3BCC3A0029717D /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74005D531D3BCC3A0029717D /* Reachability.swift */; };
 		743ADF301D39DBA5009E24FB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743ADF2F1D39DBA5009E24FB /* SettingsViewController.swift */; };
 		743ADF321D39DBB7009E24FB /* DealOfferCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743ADF311D39DBB7009E24FB /* DealOfferCell.swift */; };
 		743ADF341D39DF84009E24FB /* DistanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743ADF331D39DF84009E24FB /* DistanceCell.swift */; };
@@ -49,6 +50,7 @@
 		22AAAA981AEA0A9700A544AF /* Business.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Business.swift; sourceTree = "<group>"; };
 		22AAAA9B1AEA1EC300A544AF /* BusinessesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessesViewController.swift; sourceTree = "<group>"; };
 		34CF9866797E66C2E4E46B8C /* Pods_Yelp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yelp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		74005D531D3BCC3A0029717D /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		743ADF2F1D39DBA5009E24FB /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		743ADF311D39DBB7009E24FB /* DealOfferCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DealOfferCell.swift; sourceTree = "<group>"; };
 		743ADF331D39DF84009E24FB /* DistanceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceCell.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				222D8A5A19CCF9F900D2DB53 /* AppDelegate.swift */,
 				222D8A5E19CCF9F900D2DB53 /* Main.storyboard */,
 				222D8A6119CCF9F900D2DB53 /* Images.xcassets */,
+				74005D531D3BCC3A0029717D /* Reachability.swift */,
 				222D8A6319CCF9F900D2DB53 /* LaunchScreen.xib */,
 				222D8A5819CCF9F900D2DB53 /* Supporting Files */,
 			);
@@ -345,6 +348,7 @@
 			files = (
 				743ADF341D39DF84009E24FB /* DistanceCell.swift in Sources */,
 				74E509EA1D3887CC0014FF2D /* BusinessCell.swift in Sources */,
+				74005D541D3BCC3A0029717D /* Reachability.swift in Sources */,
 				743ADF321D39DBB7009E24FB /* DealOfferCell.swift in Sources */,
 				22AAAA9C1AEA1EC300A544AF /* BusinessesViewController.swift in Sources */,
 				743ADF361D39E618009E24FB /* SortCell.swift in Sources */,
