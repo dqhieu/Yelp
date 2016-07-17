@@ -146,12 +146,16 @@ class BusinessesViewController: UIViewController {
                 self.isNoMoreData = true
             }
             
-            self.isMoreDataLoading = false
+            
             self.tableView.reloadData()
             self.putAnnotationForBusiness()
-            self.onButtonDownTapped()
+            if !self.isMoreDataLoading {
+                self.onButtonDownTapped()
+            }
             self.hideLoadingProgress()
             self.loadingMoreView!.stopAnimating()
+            
+            self.isMoreDataLoading = false
         }
     }
     
