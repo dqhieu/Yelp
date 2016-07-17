@@ -30,6 +30,7 @@ class BusinessCell: UITableViewCell {
                     })
 
                     }, failure: nil)
+                imgViewPhoto.layer.cornerRadius = 4
             }
             if let imgURL = business.ratingImageURL {
                 imgViewStar.setImageWithURLRequest(NSURLRequest(URL: imgURL), placeholderImage: nil, success: { (request, respone, image) in

@@ -17,6 +17,7 @@
 		22AAAA9C1AEA1EC300A544AF /* BusinessesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AAAA9B1AEA1EC300A544AF /* BusinessesViewController.swift */; };
 		697E2FB97ACDA641ACC2798C /* Pods_Yelp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CF9866797E66C2E4E46B8C /* Pods_Yelp.framework */; };
 		74005D541D3BCC3A0029717D /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74005D531D3BCC3A0029717D /* Reachability.swift */; };
+		74005D561D3BD1BA0029717D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74005D551D3BD1BA0029717D /* DetailViewController.swift */; };
 		743ADF301D39DBA5009E24FB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743ADF2F1D39DBA5009E24FB /* SettingsViewController.swift */; };
 		743ADF321D39DBB7009E24FB /* DealOfferCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743ADF311D39DBB7009E24FB /* DealOfferCell.swift */; };
 		743ADF341D39DF84009E24FB /* DistanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743ADF331D39DF84009E24FB /* DistanceCell.swift */; };
@@ -51,6 +52,7 @@
 		22AAAA9B1AEA1EC300A544AF /* BusinessesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessesViewController.swift; sourceTree = "<group>"; };
 		34CF9866797E66C2E4E46B8C /* Pods_Yelp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yelp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		74005D531D3BCC3A0029717D /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		74005D551D3BD1BA0029717D /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		743ADF2F1D39DBA5009E24FB /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		743ADF311D39DBB7009E24FB /* DealOfferCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DealOfferCell.swift; sourceTree = "<group>"; };
 		743ADF331D39DF84009E24FB /* DistanceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceCell.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				743ADF331D39DF84009E24FB /* DistanceCell.swift */,
 				743ADF351D39E618009E24FB /* SortCell.swift */,
 				743ADF371D39E622009E24FB /* CategoryCell.swift */,
+				74005D551D3BD1BA0029717D /* DetailViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74005D561D3BD1BA0029717D /* DetailViewController.swift in Sources */,
 				743ADF341D39DF84009E24FB /* DistanceCell.swift in Sources */,
 				74E509EA1D3887CC0014FF2D /* BusinessCell.swift in Sources */,
 				74005D541D3BCC3A0029717D /* Reachability.swift in Sources */,

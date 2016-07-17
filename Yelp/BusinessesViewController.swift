@@ -209,6 +209,15 @@ class BusinessesViewController: UIViewController {
             vc.searchSettings = self.searchSettings
             //vc.searchSettings?.categories = self.searchSettings?.categories
         }
+        else if segue.identifier == "segueDetail" {
+            let vc = segue.destinationViewController as! DetailViewController
+            let indexPath = tableView.indexPathForCell(sender as! BusinessCell)
+            if indexPath?.row >= businesses.count {
+                return
+            }
+            let business = businesses[indexPath!.row]
+            vc.business = business
+        }
     }
 }
 
