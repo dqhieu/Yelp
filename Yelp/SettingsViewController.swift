@@ -18,6 +18,7 @@ class SettingsViewController: UIViewController {
         ["distance": "1 miles", "value": "1"],
         ["distance": "5 miles", "value": "5"],
         ["distance": "10 miles", "value": "10"],
+        ["distance": "25 miles", "value": "25"],
     ]
     var distanceSelectedIndex = 0
     var isDistanceExpanded = false
@@ -236,7 +237,7 @@ class SettingsViewController: UIViewController {
             }
         }
         // load distance
-        switch searchSettings!.maxDistance {
+        switch searchSettings!.radius {
         case 0:
             distanceSelectedIndex = 0
         case 0.3:
@@ -247,6 +248,8 @@ class SettingsViewController: UIViewController {
             distanceSelectedIndex = 3
         case 10:
             distanceSelectedIndex = 4
+        case 25:
+            distanceSelectedIndex = 5
         default:
             distanceSelectedIndex = 0
         }
@@ -424,7 +427,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         // Section Distance
         if indexPath.section == 1 {
             distanceSelectedIndex = indexPath.row
-            searchSettings!.maxDistance = Double(distances[distanceSelectedIndex]["value"]!)
+            searchSettings!.radius = Double(distances[distanceSelectedIndex]["value"]!)
             isDistanceExpanded = !isDistanceExpanded
             tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Automatic)
         }

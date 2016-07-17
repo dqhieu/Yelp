@@ -82,22 +82,14 @@ class BusinessesViewController: UIViewController {
         //print("Main start")
         //print(searchSettings.categories)
         showLoadingProgress("Loading")
-        Business.searchWithTerm(searchSettings.term, sort: searchSettings.sortBy, categories: searchSettings.categories, deals: searchSettings.deal, offset: searchSettings.offset) { (businesses: [Business]!, error: NSError!) -> Void in
+        Business.searchWithTerm(searchSettings.term, sort: searchSettings.sortBy, categories: searchSettings.categories, deals: searchSettings.deal, offset: searchSettings.offset, radius: searchSettings.radius) { (businesses: [Business]!, error: NSError!) -> Void in
             if searchSettings.offset == 0 {
                 self.businesses.removeAll()
             }
             
             if businesses != nil {
-                if searchSettings.maxDistance == 0 {
-                    self.businesses.appendContentsOf(businesses)
-                }
-                else {
-                    for business in businesses {
-                        if business.distance < searchSettings.maxDistance {
-                            self.businesses.append(business)
-                        }
-                    }
-                }
+                self.businesses.appendContentsOf(businesses)
+                self.isNoMoreData = false
                 
                 // Make sure that businesses will be sorted
                 switch searchSettings.sortBy.rawValue {
@@ -112,12 +104,13 @@ class BusinessesViewController: UIViewController {
                 default:
                     break
                 }
-
+            }
+            else {
+                self.isNoMoreData = true
             }
             
             
             self.isMoreDataLoading = false
-            self.isNoMoreData = false
             self.tableView.reloadData()
             self.hideLoadingProgress()
             self.loadingMoreView!.stopAnimating()

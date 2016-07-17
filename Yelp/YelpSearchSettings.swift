@@ -12,7 +12,7 @@ struct YelpSearchSettings {
     var term:String! = ""
     var sortBy:YelpSortMode! = YelpSortMode.Distance
     var categories:[String]! = []
-    var maxDistance:Double! = 0
+    var radius:Double! = 0
     var deal:Bool! = false
     var offset = 0
 }
