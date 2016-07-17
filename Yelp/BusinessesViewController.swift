@@ -8,6 +8,7 @@
 
 import UIKit
 import SVProgressHUD
+import MapKit
 
 class BusinessesViewController: UIViewController {
 
@@ -22,6 +23,9 @@ class BusinessesViewController: UIViewController {
     var loadingMoreView:InfiniteScrollActivityView?
     var isNoMoreData = false
     
+    let mapView = MKMapView()
+    var annotations:[MKAnnotation] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,6 +37,7 @@ class BusinessesViewController: UIViewController {
         initSearchBar()
         initNagivationBar()
         initInfiniteLoading()
+        initMapView()
         
         doSearch(searchSettings!)
     }
@@ -74,6 +79,38 @@ class BusinessesViewController: UIViewController {
         tableView.contentInset = insets
     }
     
+    func initMapView() {
+        mapView.delegate = self
+        
+        // The location used in YelpClient
+        let latitude:Double = 37.785771
+        let longitude:Double = -122.406165
+        
+        let latitudeDelta:CLLocationDegrees = 0.01
+        let longtitudeDelta:CLLocationDegrees = 0.01
+        let span:MKCoordinateSpan = MKCoordinateSpanMake(latitudeDelta, longtitudeDelta)
+        let location = CLLocationCoordinate2DMake(latitude, longitude)
+        
+        let region:MKCoordinateRegion = MKCoordinateRegionMake(location, span)
+        mapView.setRegion(region, animated: true)
+        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
+        let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.height
+        mapView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - navigationBarHeight - statusBarHeight)
+        
+        let button = UIButton(frame: CGRect(x: mapView.frame.width - 50, y: mapView.frame.height - 50, width: 50, height: 50))
+        button.setImage(UIImage(named: "down"), forState: .Normal)
+        button.addTarget(self, action: #selector(BusinessesViewController.onButtonDownTapped), forControlEvents: .TouchUpInside)
+        mapView.addSubview(button)
+        
+        tableView.tableHeaderView = mapView
+    }
+    
+    func onButtonDownTapped() {
+        if self.businesses != nil && self.businesses.count > 0 {
+            self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Bottom, animated: true)
+        }
+    }
+    
     func showSettingsViewController() {
         performSegueWithIdentifier("segueShowSettings", sender: nil)
     }
@@ -109,11 +146,28 @@ class BusinessesViewController: UIViewController {
                 self.isNoMoreData = true
             }
             
-            
             self.isMoreDataLoading = false
             self.tableView.reloadData()
+            self.putAnnotationForBusiness()
+            self.onButtonDownTapped()
             self.hideLoadingProgress()
             self.loadingMoreView!.stopAnimating()
+        }
+    }
+    
+    func putAnnotationForBusiness() {
+        mapView.removeAnnotations(annotations)
+        annotations.removeAll()
+        if self.businesses != nil && self.businesses.count > 0 {
+            for business in businesses {
+                let annotation = MKPointAnnotation()
+                annotation.title = business.name
+                annotation.subtitle = business.categories
+                let location = CLLocationCoordinate2DMake(business.latitude!, business.longitude!)
+                annotation.coordinate = location
+                annotations.append(annotation)
+            }
+            mapView.addAnnotations(annotations)
         }
     }
     
@@ -274,5 +328,37 @@ class InfiniteScrollActivityView: UIView {
     func startAnimating() {
         self.hidden = false
         self.activityIndicatorView.startAnimating()
+    }
+}
+
+extension BusinessesViewController: MKMapViewDelegate {
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            return nil
+        }
+        let identifier = "MyCustomAnnotation"
+        
+        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
+        if annotationView == nil {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView?.canShowCallout = true
+        } else {
+            annotationView!.annotation = annotation
+        }
+        
+        var business:Business?
+        for b in businesses {
+            if b.latitude == annotation.coordinate.latitude && b.longitude == annotation.coordinate.longitude {
+                business = b
+                break
+            }
+        }
+        
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 70, height: 70))
+        imageView.setImageWithURL((business?.imageURL)!)
+        
+        annotationView?.leftCalloutAccessoryView = imageView
+        
+        return annotationView
     }
 }
